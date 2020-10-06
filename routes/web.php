@@ -21,3 +21,28 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('test/language/{locale?}', function($locale = 'pt'){
+    $languages = ['en', 'pt'];
+
+    if(! in_array($locale, $languages)) {
+        abort(400);
+    }
+
+    App::setLocale($locale);
+
+    echo __('auth.failed');
+
+    // BLADE
+    // {{ __('auth.failed') }}
+
+    // App::getLocale()
+    // App::setLocale()
+    // App::isLocale('en')
+
+    if(App::isLocale('en')) {
+        echo '<p>';
+        echo 'estamos em inglês';
+        echo '</p>';
+    }
+});
