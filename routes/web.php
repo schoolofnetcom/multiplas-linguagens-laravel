@@ -43,3 +43,29 @@ Route::get('test/language/{locale?}', function($locale = 'pt'){
 
     echo __('auth.throttle');
 });
+
+Route::get('home/{locale?}', function($locale = 'pt'){
+    $languages = ['en', 'pt'];
+
+    if(! in_array($locale, $languages)) {
+        return abort(400);
+    }
+
+    App::setLocale($locale);
+
+    echo '<p>';
+    echo __('home.header.title');
+    echo '</p>';
+
+    echo '<p>';
+    echo __('home.header.subtitle');
+    echo '</p>';
+
+    echo '<p>';
+    echo __('home.main');
+    echo '</p>';
+
+    echo '<p>';
+    echo __('home.footer');
+    echo '</p>';
+});
