@@ -26,23 +26,20 @@ Route::get('test/language/{locale?}', function($locale = 'pt'){
     $languages = ['en', 'pt'];
 
     if(! in_array($locale, $languages)) {
-        abort(400);
+        return abort(400);
     }
 
     App::setLocale($locale);
 
-    echo __('auth.failed');
-
-    // BLADE
-    // {{ __('auth.failed') }}
-
-    // App::getLocale()
-    // App::setLocale()
-    // App::isLocale('en')
+    echo '<p>';
+    echo App::getLocale();
+    echo '</p>';
 
     if(App::isLocale('en')) {
         echo '<p>';
-        echo 'estamos em inglês';
+        echo 'Estamos no ambiente inglês';
         echo '</p>';
     }
+
+    echo __('auth.throttle');
 });
