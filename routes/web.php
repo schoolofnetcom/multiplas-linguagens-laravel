@@ -69,3 +69,17 @@ Route::get('home/{locale?}', function($locale = 'pt'){
     echo __('home.footer');
     echo '</p>';
 });
+
+Route::get('string_as_key/{locale?}', function($locale = 'pt'){
+    $languages = ['en', 'pt'];
+
+    if(! in_array($locale, $languages)) {
+        return abort(400);
+    }
+
+    App::setLocale($locale);
+
+    echo '<p>';
+    echo __('I love programming.');
+    echo '</p>';
+});
