@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -81,5 +82,25 @@ Route::get('string_as_key/{locale?}', function($locale = 'pt'){
 
     echo '<p>';
     echo __('I love programming.');
+    echo '</p>';
+});
+
+Route::get('replace/{name}/{locale?}', function($name, $locale = 'pt'){
+    $languages = ['en', 'pt'];
+
+    if(! in_array($locale, $languages)) {
+        return abort(400);
+    }
+
+    App::setLocale($locale);
+
+    echo '<p>';
+    echo __('replace.welcome', ['name' => $name]);
+    echo '</p>';
+
+    $day = Carbon::now();
+
+    echo '<p>';
+    echo __('replace.today', ['day' => $day->day]);
     echo '</p>';
 });
