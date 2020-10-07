@@ -46,10 +46,36 @@
                 </div>
 
                 <div>
-                    {{ __('I love programming.') }}
-                    {{ __('Code is Poetry.') }}
-                    {{ __('file.key') }}
-                    {{ __('My phrase.') }}
+
+                    @php
+                        // METODOS COM PHP
+                        echo '<p>';
+                            echo __('home.header.title');
+                        echo '</p>';
+
+                        echo '<p>';
+                            echo __('I love programming.');
+                        echo '</p>';
+
+                        echo '<p>';
+                            echo trans('home.header.title');
+                        echo '</p>';
+
+                        echo '<p>';
+                            echo trans('I love programming.');
+                        echo '</p>';
+                    @endphp
+
+                    {{-- METODOS COM BLADE --}}
+                    <p>{{ __('home.header.title') }}</p>
+                    <p>{{ __('I love programming.') }}</p>
+
+                    <p>@lang('home.header.title')</p>
+                    <p>@lang('I love programming.')</p>
+
+                    <p>{{ trans('home.header.title') }}</p>
+                    <p>{{ trans('I love programming.') }}</p>
+
                 </div>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
