@@ -104,3 +104,47 @@ Route::get('replace/{name}/{locale?}', function($name, $locale = 'pt'){
     echo __('replace.today', ['day' => $day->day]);
     echo '</p>';
 });
+
+Route::get('plural_simple/{quantity}/{locale?}', function($quantity, $locale = 'pt'){
+    $languages = ['en', 'pt'];
+
+    if(! in_array($locale, $languages)) {
+        return abort(400);
+    }
+
+    App::setLocale($locale);
+
+    echo '<p>';
+    echo trans_choice('plural.simple', $quantity);
+    echo '</p>';
+});
+
+Route::get('plural_complex/{quantity}/{locale?}', function($quantity, $locale = 'pt'){
+    $languages = ['en', 'pt'];
+
+    if(! in_array($locale, $languages)) {
+        return abort(400);
+    }
+
+    App::setLocale($locale);
+
+    echo '<p>';
+    echo trans_choice('plural.complex', $quantity);
+    echo '</p>';
+});
+
+Route::get('plural_complex_bind/{quantity}/{locale?}', function($quantity, $locale = 'pt'){
+    $languages = ['en', 'pt'];
+
+    if(! in_array($locale, $languages)) {
+        return abort(400);
+    }
+
+    App::setLocale($locale);
+
+    $bindWord = App::isLocale('pt') ? 'carros' : 'cars';
+
+    echo '<p>';
+    echo trans_choice('plural.complex_bind', $quantity, ['value' => $bindWord]);
+    echo '</p>';
+});
